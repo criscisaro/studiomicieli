@@ -1,12 +1,29 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import ProfessionistiPage from '../../components/pages/ProfessionistiPage.astro';
+import { TEAM } from '../../data';
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'LegalService',
+  name: 'Studio Legale Micieli',
+  url: 'https://studiolegalemicieli.it',
+  areaServed: { '@type': 'City', name: 'Ragusa' },
+  employee: TEAM.map((p) => ({
+    '@type': 'Person',
+    name: p.name.replace(/^(Avv\.|Dott\.)\s*/, ''),
+    jobTitle: p.role,
+    image: `https://studiolegalemicieli.it${p.photo}`,
+    worksFor: { '@type': 'LegalService', name: 'Studio Legale Micieli' },
+  })),
+};
 ---
 <BaseLayout
   title="I Professionisti | Studio Legale Micieli Ragusa"
-  description="Il team dello Studio Legale Micieli: avvocati cassazionisti, dottorandi di ricerca, revisori legali e struttura amministrativa. Competenze integrate in ambito tributario, societario, penale e civile."
+  description="Il team dello Studio Legale Micieli a Ragusa: avvocati cassazionisti, dottorandi di ricerca e revisori legali. Competenze integrate in ogni area del diritto."
   canonical="https://studiolegalemicieli.it/professionisti/"
   active="professionisti"
 >
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(schema)} />
   <ProfessionistiPage />
 </BaseLayout>

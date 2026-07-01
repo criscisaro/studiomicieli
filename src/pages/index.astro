@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import HomePage from '../components/pages/HomePage.astro';
+import { FAQS } from '../data';
 
 const schema = {
   '@context': 'https://schema.org',
@@ -30,13 +31,24 @@ const schema = {
   priceRange: '€€',
   hasCredential: 'ISO 9001:2015 dal 2019',
 };
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: FAQS.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+};
 ---
 <BaseLayout
   title="Studio Legale Micieli — Ragusa"
-  description="Studio Legale Micieli a Ragusa: consulenza in diritto tributario, societario, recupero crediti, compliance 231 e diritto civile. Patrocinante in Cassazione. Certificato ISO 9001:2015."
+  description="Studio Legale Micieli, Ragusa: diritto tributario, societario, recupero crediti, compliance 231, civile e penale. Patrocinante in Cassazione. ISO 9001."
   canonical="https://studiolegalemicieli.it/"
   active="home"
 >
   <script type="application/ld+json" slot="head" set:html={JSON.stringify(schema)} />
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(faqSchema)} />
   <HomePage />
 </BaseLayout>
