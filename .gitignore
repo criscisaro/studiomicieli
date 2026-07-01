@@ -1,0 +1,22 @@
+# build output
+dist/
+.output/
+
+# dependencies
+node_modules/
+
+# astro
+.astro/
+
+# environment
+.env
+.env.production
+
+# logs
+*.log
+
+# macOS
+.DS_Store
+
+# vercel
+.vercel

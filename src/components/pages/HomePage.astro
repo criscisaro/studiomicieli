@@ -1,0 +1,164 @@
+---
+import { SERVICES, EVENTS, STUDIO, FAQS } from '../../data';
+import Arrow from '../Arrow.astro';
+import Pattern from '../Pattern.astro';
+
+const stats = [
+  ['40+', 'Anni di<br/>esperienza'],
+  ['200+', "Pratiche<br/>l'anno"],
+  ['30+', 'Comuni<br/>serviti'],
+  ['6', 'Aree<br/>di pratica'],
+];
+const eventTones = ['scallop', 'checker', 'bars', 'diamond'];
+function toneFor(id: string) { return eventTones[(id.length || 0) % eventTones.length]; }
+---
+<main>
+  <!-- HERO -->
+  <section class="section" style="padding-top:clamp(36px, 5vw, 64px);padding-bottom:clamp(48px, 7vw, 96px);background:var(--ink-800)">
+    <div class="container">
+      <div class="hero-grid">
+        <div style="display:flex;flex-direction:column;justify-content:space-between;padding-top:12px">
+          <div>
+            <h1 class="display" style="margin:0;font-size:clamp(34px, 5.4vw, 72px);font-weight:300;letter-spacing:0.06em;padding-top:6px">
+              Tutela <span class="quote" style="text-transform:none;letter-spacing:0;font-style:italic;color:var(--gold-500);font-weight:400">su&nbsp;misura</span><br />
+              per imprese,<br />privati ed enti.
+            </h1>
+            <p style="margin-top:28px;font-size:clamp(15px, 1.25vw, 17px);line-height:1.75;max-width:520px;opacity:0.88;text-wrap:pretty">{STUDIO.intro}</p>
+          </div>
+
+          <div style="display:flex;flex-wrap:wrap;gap:12px;margin-top:40px">
+            <a href="/servizi/" data-variant="filled" class="label-track" style="background:var(--gold-500);color:var(--ink-900);border:none;padding:16px 24px;font-size:11px;display:inline-flex;align-items:center;gap:12px">Le aree di pratica <Arrow /></a>
+            <a href="/professionisti/" class="label-track" style="background:transparent;color:var(--cream);border:1px solid var(--line-strong);padding:16px 24px;font-size:11px;display:inline-flex;align-items:center">I professionisti</a>
+          </div>
+
+          <div class="stats">
+            {stats.map(([n, label]) => (
+              <div>
+                <div class="display" style="font-size:clamp(22px, 2.6vw, 30px);color:var(--gold-500);font-weight:300;letter-spacing:0.08em">{n}</div>
+                <div style="margin-top:8px;font-size:12px;letter-spacing:0.14em;text-transform:uppercase;opacity:0.7" set:html={label}></div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div class="hero-right">
+          <div style="grid-column:1 / span 2;background-image:url('/assets/studio-04.jpg');background-size:cover;background-position:center;height:100%" role="img" aria-label="Studio Micieli — interno"></div>
+          <div style="position:relative;overflow:hidden"><Pattern tone="diamond" /></div>
+          <div style="background-image:url('/assets/studio-02.jpg');background-size:cover;background-position:center;height:100%" role="img" aria-label="Studio Micieli — corridoio"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VALORI -->
+  <section style="position:relative;background:var(--ink-900)">
+    <div style="position:absolute;inset:0;opacity:0.5"><Pattern tone="bars" /></div>
+    <div style="position:absolute;inset:0;background:linear-gradient(180deg, rgba(29,47,46,0.55) 0%, rgba(29,47,46,0.85) 100%)" aria-hidden="true"></div>
+    <div style="position:relative;max-width:var(--container);margin:0 auto;padding:clamp(80px, 11vw, 140px) var(--pad-x)">
+      <div class="valori-grid">
+        <div class="valori-photos">
+          <div style="grid-column:1 / span 2;background-image:url('/assets/studio-01.jpg');background-size:cover;background-position:center;height:100%" role="img" aria-label="Studio Micieli — ufficio storico"></div>
+          <div style="background-image:url('/assets/studio-03.jpg');background-size:cover;background-position:center;height:100%" role="img" aria-label="Studio Micieli — sala riunioni"></div>
+          <div style="position:relative;overflow:hidden;height:100%"><Pattern tone="scallop" /></div>
+        </div>
+        <div style="background:var(--ink-800);padding:clamp(36px, 5vw, 64px);border:1px solid var(--line);display:flex;flex-direction:column;justify-content:center">
+          <div class="eyebrow" style="color:var(--gold-500);margin-bottom:22px">I valori dello Studio</div>
+          <p class="display" style="margin:0;font-size:clamp(18px, 1.7vw, 22px);font-weight:300;letter-spacing:0.18em;line-height:1.7;text-transform:uppercase">
+            Professionalità e aggiornamento costante. Trasparenza, flessibilità e soluzioni su misura per ogni cliente.
+          </p>
+          <div style="height:1px;background:var(--line);margin:32px 0"></div>
+          <p style="margin:0;opacity:0.85;line-height:1.75;font-size:15px">{STUDIO.values}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVIZI teaser -->
+  <section class="section" style="background:var(--ink-800)">
+    <div class="container">
+      <div style="display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:24px;margin-bottom:56px">
+        <div style="max-width:760px">
+          <div class="eyebrow" style="color:var(--gold-500);margin-bottom:18px">Aree di pratica</div>
+          <h2 class="display" style="font-size:clamp(28px, 4.4vw, 54px);margin:0;font-weight:300">Sei discipline,<br />un approccio integrato.</h2>
+        </div>
+        <a href="/servizi/" class="label-track" style="background:transparent;border:1px solid var(--line-strong);color:var(--cream);padding:14px 22px;font-size:11px;display:inline-flex;align-items:center;gap:10px">Tutte le aree <Arrow /></a>
+      </div>
+
+      <div style="display:flex;flex-direction:column;border-top:1px solid var(--line)">
+        {SERVICES.map((s, i) => (
+          <a href={`/servizi/#${s.id}`} class="serv-row">
+            <span style="font-size:12px;opacity:0.55;letter-spacing:0.16em">0{i + 1}</span>
+            <span class="display" style="font-size:clamp(18px, 1.9vw, 24px);letter-spacing:0.08em;font-weight:300">{s.title}</span>
+            <span class="serv-row-desc" style="font-size:14px;line-height:1.6;opacity:0.78;text-wrap:pretty">{s.alt || s.short}</span>
+            <span class="serv-arrow"><Arrow size={16} /></span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section" style="background:var(--ink-800);padding-top:clamp(64px, 9vw, 112px);padding-bottom:clamp(64px, 9vw, 112px)">
+    <div class="container">
+      <div style="margin-bottom:48px;max-width:760px">
+        <div class="eyebrow" style="color:var(--gold-500);margin-bottom:18px">Domande frequenti</div>
+        <h2 class="display" style="font-size:clamp(28px, 4.4vw, 54px);margin:0;font-weight:300">Risposte chiare<br />a dubbi comuni.</h2>
+      </div>
+      <div class="faq-grid">
+        {FAQS.map((faq) => (
+          <div class="faq-item">
+            <button class="faq-q" type="button">
+              <div style="flex:1">
+                <span class="eyebrow" style="color:var(--gold-500);display:block;margin-bottom:8px;font-size:9px">{faq.tag}</span>
+                <span style="font-size:clamp(13px, 1.1vw, 15px);line-height:1.5;font-weight:400">{faq.q}</span>
+              </div>
+              <span class="faq-plus">
+                <svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true"><path d="M5 1 V9 M1 5 H9" stroke="currentColor" stroke-width="1.4" /></svg>
+              </span>
+            </button>
+            <div class="faq-answer">
+              <div style="border-top:1px solid var(--line);margin:0 clamp(18px,2vw,26px);padding-bottom:clamp(18px,2vw,26px)">
+                <p style="margin:16px 0 0;font-size:13.5px;line-height:1.75;opacity:0.82;text-wrap:pretty">{faq.a}</p>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- EVENTI teaser -->
+  <section class="section" style="background:var(--ink-900);padding-top:clamp(64px, 9vw, 112px);padding-bottom:clamp(64px, 9vw, 112px)">
+    <div class="container">
+      <div style="display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:24px;margin-bottom:48px">
+        <div style="max-width:760px">
+          <div class="eyebrow" style="color:var(--gold-500);margin-bottom:18px">Eventi</div>
+          <h2 class="display" style="font-size:clamp(28px, 4.4vw, 54px);margin:0;font-weight:300">Formazione, dibattito, presenza sul territorio.</h2>
+        </div>
+        <a href="/eventi/" class="label-track" style="background:transparent;border:1px solid var(--line-strong);color:var(--cream);padding:14px 22px;font-size:11px;display:inline-flex;align-items:center;gap:10px">Calendario eventi <Arrow /></a>
+      </div>
+      <div class="eve-grid">
+        {EVENTS.map((ev) => (
+          <a href="/eventi/" class="evt-card">
+            <div style="position:relative;overflow:hidden;min-height:240px">
+              <Pattern tone={toneFor(ev.id)} />
+              <div style="position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;padding:20px;background:linear-gradient(180deg, transparent 35%, rgba(29,47,46,0.65) 100%)">
+                <div style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(28px, 3.6vw, 44px);color:var(--cream);line-height:1;text-shadow:0 2px 14px rgba(0,0,0,0.45)">{ev.dateShort}</div>
+              </div>
+            </div>
+            <div style="padding:clamp(20px, 2.4vw, 28px);display:flex;flex-direction:column;justify-content:space-between">
+              <div>
+                <div class="eyebrow" style="color:var(--ink-700)">{ev.kind}</div>
+                <h3 class="display" style="font-size:clamp(16px, 1.5vw, 19px);font-weight:400;letter-spacing:0.1em;margin:14px 0 12px;color:var(--ink-900)">{ev.title}</h3>
+                <p style="margin:0;font-size:14px;line-height:1.6;color:var(--ink-700);text-wrap:pretty">{ev.blurb}</p>
+              </div>
+              <div style="margin-top:20px;display:flex;justify-content:flex-end;color:var(--ink-800)">
+                <span class="evt-arrow"><Arrow size={16} /></span>
+              </div>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+</main>

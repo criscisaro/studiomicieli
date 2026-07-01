@@ -1,0 +1,96 @@
+---
+import { SEO } from 'astro-seo';
+import '../styles.css';
+import Footer from '../components/Footer.astro';
+import CookieBanner from '../components/CookieBanner.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  canonical: string;
+  active?: string;
+  ogType?: string;
+}
+
+const { title, description, canonical, active = '', ogType = 'website' } = Astro.props;
+const image = 'https://studiolegalemicieli.it/assets/studio-01.jpg';
+
+const nav = [
+  { href: '/', id: 'home', label: 'Studio' },
+  { href: '/servizi/', id: 'servizi', label: 'Servizi' },
+  { href: '/professionisti/', id: 'professionisti', label: 'Professionisti' },
+  { href: '/eventi/', id: 'eventi', label: 'Eventi' },
+];
+---
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="icon" href="/assets/logo.png" />
+  <SEO
+    title={title}
+    description={description}
+    canonical={canonical}
+    openGraph={{
+      basic: { title, type: ogType, image, url: canonical },
+      optional: { description, locale: 'it_IT', siteName: 'Studio Legale Micieli' },
+      image: { alt: 'Studio Legale Micieli — Ragusa' },
+    }}
+    twitter={{ card: 'summary_large_image', title, description, image, imageAlt: 'Studio Legale Micieli — Ragusa' }}
+    extend={{
+      link: [{ rel: 'sitemap', href: '/sitemap-index.xml' }],
+      meta: [
+        { name: 'geo.region', content: 'IT-RG' },
+        { name: 'geo.placename', content: 'Ragusa' },
+        { name: 'robots', content: 'index, follow' },
+      ],
+    }}
+  />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700&family=Cormorant+Garamond:ital,wght@1,300;1,400;1,500&display=swap" rel="stylesheet" />
+  <slot name="head" />
+</head>
+<body>
+  <header class="site-header" id="siteHeader">
+    <div class="header-inner">
+      <a href="/" style="display:inline-flex" aria-label="Studio Legale Micieli — home">
+        <span class="brand-mask" style="width:234px;height:28px" role="img" aria-label="Studio Legale Micieli"></span>
+      </a>
+
+      <nav class="desk-nav" aria-label="Principale">
+        {nav.slice(1).map((n) => (
+          <a href={n.href} class="label-track" aria-current={active === n.id ? 'page' : undefined}>{n.label}</a>
+        ))}
+      </nav>
+
+      <button class="mob-burger" id="burger" aria-label="Menu" aria-expanded="false" aria-controls="mobDrawer">
+        <span></span><span></span>
+      </button>
+    </div>
+
+    <div class="mob-drawer" id="mobDrawer">
+      <div class="mob-drawer-inner">
+        {nav.map((n) => (
+          <a href={n.href} aria-current={active === n.id ? 'page' : undefined}>{n.label}</a>
+        ))}
+      </div>
+    </div>
+  </header>
+
+  <slot />
+
+  <Footer />
+
+  <button class="scroll-top" id="scrollTop" aria-label="Torna in alto">
+    <svg width="16" height="16" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+      <path d="M9 14 L9 4 M4 9 L9 4 L14 9" stroke="currentColor" stroke-width="1.6" fill="none" />
+    </svg>
+  </button>
+
+  <CookieBanner />
+
+  <script is:inline src="/client.js"></script>
+</body>
+</html>

@@ -1,0 +1,43 @@
+---
+import { TEAM } from '../../data';
+---
+<main>
+  <section class="section" style="background:var(--ink-800);padding-top:clamp(56px, 7vw, 96px);padding-bottom:clamp(56px, 7vw, 96px)">
+    <div class="container">
+      <div style="max-width:760px">
+        <div class="eyebrow" style="color:var(--gold-500);margin-bottom:18px">Professionisti</div>
+        <h1 class="display" style="font-size:clamp(28px, 4.4vw, 54px);margin:0;font-weight:300">Un team multidisciplinare.<br />Esperienze che si integrano.</h1>
+        <p style="margin-top:26px;font-size:clamp(15px, 1.3vw, 17px);line-height:1.7;opacity:0.86;max-width:640px;text-wrap:pretty">
+          Lo Studio riunisce avvocati cassazionisti, giovani professionisti formati nelle migliori università italiane, dottorandi di ricerca, revisori legali e una struttura amministrativa che garantisce continuità operativa al servizio dei nostri clienti.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="background:var(--ink-800);padding-top:clamp(8px, 1vw, 24px);padding-bottom:clamp(8px, 1vw, 24px)">
+    <div class="container">
+      <div class="team-grid">
+        {TEAM.map((p) => (
+          <div class="team-card">
+            <div class="team-photo-wrap">
+              <img class="team-photo" src={p.photo} alt={p.name} loading="lazy" />
+            </div>
+            <div class="team-plate">
+              <div class="label-track" style="font-size:11px;color:var(--gold-500)">{p.role}</div>
+              <div style="margin-top:6px;font-size:14px;font-weight:500;letter-spacing:0.04em">{p.name}</div>
+            </div>
+            <div class="team-bio">
+              <div class="label-track" style="font-size:10px;color:var(--gold-500)">{p.role}</div>
+              <div style="margin-top:8px;font-size:14px;font-weight:600;letter-spacing:0.02em">{p.name}</div>
+              <div class="quote" style="margin-top:6px;font-size:11px;opacity:0.7;font-style:italic">{p.short}</div>
+              <div class="team-bio-text" style="text-wrap:pretty">{p.bio}</div>
+              <div style="margin-top:12px;display:flex;flex-wrap:wrap;gap:6px">
+                {p.tags.map((t) => (<span class="team-tag">{t}</span>))}
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+</main>

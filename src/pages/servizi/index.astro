@@ -1,0 +1,31 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ServiziPage from '../../components/pages/ServiziPage.astro';
+import { SERVICES } from '../../data';
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  name: 'Aree di pratica — Studio Legale Micieli',
+  itemListElement: SERVICES.map((s, i) => ({
+    '@type': 'ListItem',
+    position: i + 1,
+    item: {
+      '@type': 'Service',
+      name: s.title,
+      description: s.short,
+      provider: { '@type': 'LegalService', name: 'Studio Legale Micieli' },
+      areaServed: { '@type': 'City', name: 'Ragusa' },
+    },
+  })),
+};
+---
+<BaseLayout
+  title="Servizi Legali — Tributario, Societario, 231 | Studio Micieli Ragusa"
+  description="Le sei aree di pratica dello Studio Legale Micieli: diritto tributario, societario, recupero crediti, civile, penale e compliance 231. Consulenza giudiziale ed extragiudiziale a Ragusa."
+  canonical="https://studiolegalemicieli.it/servizi/"
+  active="servizi"
+>
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(schema)} />
+  <ServiziPage />
+</BaseLayout>

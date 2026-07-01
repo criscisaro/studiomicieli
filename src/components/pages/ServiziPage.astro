@@ -1,0 +1,77 @@
+---
+import { SERVICES } from '../../data';
+import Arrow from '../Arrow.astro';
+const first = SERVICES[0].id;
+---
+<main>
+  <section class="section" style="background:var(--ink-800);padding-top:clamp(56px, 7vw, 96px);padding-bottom:clamp(56px, 7vw, 96px)">
+    <div class="container">
+      <div style="max-width:760px">
+        <div class="eyebrow" style="color:var(--gold-500);margin-bottom:18px">Servizi</div>
+        <h1 class="display" style="font-size:clamp(28px, 4.4vw, 54px);margin:0;font-weight:300">Consulenza giudiziale ed extragiudiziale.<br />Approccio integrato.</h1>
+        <p style="margin-top:26px;font-size:clamp(15px, 1.3vw, 17px);line-height:1.7;opacity:0.86;max-width:640px;text-wrap:pretty">
+          Lo Studio Legale Micieli opera principalmente in Sicilia, svolgendo attività di consulenza giudiziale e stragiudiziale ad imprese e privati. Sei aree di pratica, una sola visione: tutela su misura, costruita con rigore.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pills -->
+  <section style="background:var(--ink-900);border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
+    <div class="container">
+      <div class="serv-pills">
+        {SERVICES.map((s) => (
+          <button type="button" class:list={["serv-pill", "label-track", { active: s.id === first }]} data-serv-pill={s.id}>{s.shortTitle || s.title}</button>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Detail (one panel visible at a time) -->
+  <section class="section" style="background:var(--ink-800);padding-top:clamp(60px, 8vw, 96px);padding-bottom:clamp(60px, 8vw, 96px)">
+    <div class="container">
+      {SERVICES.map((s) => (
+        <div class:list={["serv-detail-panel", { active: s.id === first }]} data-serv-panel={s.id}>
+          <div class="serv-detail">
+            <div style="background:var(--sage-card);color:var(--ink-900);padding:clamp(24px, 3vw, 36px);position:relative">
+              <div class="eyebrow" style="color:var(--ink-700)">Area di pratica</div>
+              <h2 class="display" style="margin:14px 0;font-size:clamp(22px, 2.4vw, 30px);letter-spacing:0.06em;font-weight:400;color:var(--ink-900);text-wrap:balance">{s.title}</h2>
+              <p class="quote" style="font-size:clamp(15px, 1.35vw, 18px);line-height:1.5;color:var(--ink-700);margin:0;text-wrap:pretty">{s.short}</p>
+              <div style="position:absolute;left:0;right:0;bottom:0;height:4px;background:var(--gold-500)"></div>
+            </div>
+            <div>
+              <p style="font-size:clamp(15px, 1.25vw, 17px);line-height:1.8;opacity:0.92;margin:0;text-wrap:pretty">{s.detail}</p>
+              <div style="margin-top:36px;padding-top:28px;border-top:1px solid var(--line)">
+                <div class="eyebrow" style="color:var(--gold-500);margin-bottom:16px">Hai un caso da valutare?</div>
+                <p style="margin:0 0 20px;opacity:0.85;line-height:1.65">
+                  Scrivi a <a href="mailto:studio@studiolegalemicieli.it" style="color:var(--gold-500)">studio@studiolegalemicieli.it</a> o chiama lo <a href="tel:+390932652308" style="color:var(--gold-500)">0932 652308</a>. Concorderemo un primo confronto riservato.
+                </p>
+                <a href="/professionisti/" class="label-track" style="background:transparent;color:var(--cream);border:1px solid var(--line-strong);padding:14px 20px;font-size:11px;display:inline-flex;align-items:center;gap:10px">I professionisti del team <Arrow /></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- All tiles -->
+  <section class="section" style="background:var(--ink-900)">
+    <div class="container">
+      <div style="max-width:760px">
+        <div class="eyebrow" style="color:var(--gold-500);margin-bottom:18px">Indice</div>
+        <h2 class="display" style="font-size:clamp(28px, 4.4vw, 54px);margin:0;font-weight:300">Tutte le aree di pratica</h2>
+      </div>
+      <div class="serv-tiles">
+        {SERVICES.map((s, i) => (
+          <button type="button" class:list={["serv-tile", { active: s.id === first }]} data-serv-tile={s.id}>
+            <span style="font-size:11px;opacity:0.6;letter-spacing:0.18em">0{i + 1}</span>
+            <div>
+              <div class="display" style="font-size:clamp(13px, 1.4vw, 17px);letter-spacing:0.06em;font-weight:400;margin-top:18px;line-height:1.25;overflow-wrap:break-word;hyphens:auto;text-wrap:pretty">{s.title}</div>
+            </div>
+          </button>
+        ))}
+      </div>
+    </div>
+  </section>
+</main>

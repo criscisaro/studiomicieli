@@ -1,0 +1,35 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import EventiPage from '../../components/pages/EventiPage.astro';
+import { EVENTS } from '../../data';
+
+const MONTHS: Record<string, string> = {
+  Gennaio: '01', Febbraio: '02', Marzo: '03', Aprile: '04', Maggio: '05', Giugno: '06',
+  Luglio: '07', Agosto: '08', Settembre: '09', Ottobre: '10', Novembre: '11', Dicembre: '12',
+};
+function iso(date: string): string {
+  const [d, m, y] = date.split(' ');
+  return `${y}-${MONTHS[m] || '01'}-${d.padStart(2, '0')}`;
+}
+
+const schema = EVENTS.map((ev) => ({
+  '@context': 'https://schema.org',
+  '@type': 'Event',
+  name: ev.title,
+  startDate: iso(ev.date),
+  eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
+  eventStatus: 'https://schema.org/EventScheduled',
+  description: ev.blurb,
+  location: { '@type': 'Place', name: ev.location, address: 'Ragusa, Italia' },
+  organizer: { '@type': 'LegalService', name: 'Studio Legale Micieli', url: 'https://studiolegalemicieli.it' },
+}));
+---
+<BaseLayout
+  title="Eventi e Formazione Giuridica | Studio Legale Micieli Ragusa"
+  description="Eventi, convegni e formazione dello Studio Legale Micieli a Ragusa: compliance aziendale, modelli 231, sostenibilità e diritto tributario. Scopri il calendario e le locandine."
+  canonical="https://studiolegalemicieli.it/eventi/"
+  active="eventi"
+>
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(schema)} />
+  <EventiPage />
+</BaseLayout>

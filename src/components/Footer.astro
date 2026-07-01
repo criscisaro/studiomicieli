@@ -1,0 +1,68 @@
+---
+import { STUDIO } from '../data';
+const year = new Date().getFullYear();
+const nav = [
+  ['/', 'Studio'],
+  ['/servizi/', 'Servizi'],
+  ['/professionisti/', 'Professionisti'],
+  ['/eventi/', 'Eventi'],
+];
+---
+<footer class="site-footer">
+  <div class="foot-inner">
+    <div class="foot-grid">
+      <div>
+        <span class="brand-mask" style="width:234px;height:28px" role="img" aria-label="Studio Legale Micieli"></span>
+        <p style="margin-top:22px;max-width:320px;font-size:14px;line-height:1.6;opacity:0.78">
+          Partner di eccellenza per imprese, privati ed enti pubblici. Assistenza legale completa, integrata e multidisciplinare.
+        </p>
+        <div style="display:flex;gap:14px;margin-top:28px;align-items:center">
+          <div class="cert-badge">ACCREDIA</div>
+          <div class="cert-badge">ISO 9001:2015</div>
+        </div>
+      </div>
+
+      <div>
+        <div class="eyebrow" style="color:var(--gold-500);margin-bottom:18px">Sede</div>
+        <p style="margin:0;font-size:14px;line-height:1.75;opacity:0.85">
+          Piazza Libertà 10<br />97100 Ragusa<br />Italia
+        </p>
+        <div style="margin-top:22px;padding-top:18px;border-top:1px solid var(--line)">
+          <div class="eyebrow" style="color:var(--gold-500);margin-bottom:10px;font-size:10px">Orari</div>
+          <p style="margin:0;font-size:14px;line-height:1.6;opacity:0.85">
+            Lunedì — Venerdì<br />
+            <span style="color:var(--gold-500)">09.00 — 20.00</span>
+          </p>
+        </div>
+      </div>
+
+      <div>
+        <div class="eyebrow" style="color:var(--gold-500);margin-bottom:18px">Contatti</div>
+        <p style="margin:0;font-size:14px;line-height:1.75;opacity:0.85">
+          <a href={`mailto:${STUDIO.email}`} style="display:block">{STUDIO.email}</a>
+          <a href={`tel:${STUDIO.phoneHref}`} style="display:block;margin-top:4px">{STUDIO.phone}</a>
+        </p>
+      </div>
+
+      <div>
+        <div class="eyebrow" style="color:var(--gold-500);margin-bottom:18px">Naviga</div>
+        <div style="display:flex;flex-direction:column;gap:10px">
+          {nav.map(([href, label]) => (
+            <a href={href} style="color:var(--cream);opacity:0.85;font-size:14px">{label}</a>
+          ))}
+        </div>
+      </div>
+    </div>
+
+    <div class="foot-bottom">
+      <span>© {year} Studio Legale Micieli · P.IVA {STUDIO.pIva}</span>
+      <div style="display:flex;gap:18px;flex-wrap:wrap;align-items:center">
+        <a href="/privacy/">Privacy Policy</a>
+        <a href="/cookie/">Cookie Policy</a>
+        <button type="button" data-cookie-settings style="background:transparent;border:none;color:inherit;padding:0;font-family:inherit;font-size:12px;cursor:pointer;letter-spacing:0.04em">Preferenze Cookie</button>
+        <span style="opacity:0.7">ISO 9001:2015 dal 2019</span>
+        <span style="opacity:0.4;letter-spacing:0.06em">· Creato da <a href="https://keyapp.it" target="_blank" rel="noopener" style="color:inherit">KeyApp</a></span>
+      </div>
+    </div>
+  </div>
+</footer>

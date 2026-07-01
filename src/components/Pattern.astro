@@ -1,0 +1,5 @@
+---
+interface Props { tone?: string; }
+const { tone = 'diamond' } = Astro.props;
+---
+<div class={`pattern ${tone}`} aria-hidden="true"></div>

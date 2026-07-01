@@ -1,0 +1,42 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import HomePage from '../components/pages/HomePage.astro';
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': ['LegalService', 'LocalBusiness'],
+  name: 'Studio Legale Micieli',
+  description: 'Studio legale a Ragusa specializzato in diritto tributario, societario, recupero crediti, compliance 231, diritto civile e penale.',
+  url: 'https://studiolegalemicieli.it',
+  telephone: '+390932652308',
+  email: 'studio@studiolegalemicieli.it',
+  image: 'https://studiolegalemicieli.it/assets/studio-01.jpg',
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: 'Piazza Libertà 10',
+    addressLocality: 'Ragusa',
+    postalCode: '97100',
+    addressCountry: 'IT',
+  },
+  geo: { '@type': 'GeoCoordinates', latitude: '36.9292', longitude: '14.7300' },
+  openingHoursSpecification: {
+    '@type': 'OpeningHoursSpecification',
+    dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+    opens: '09:00',
+    closes: '20:00',
+  },
+  areaServed: { '@type': 'City', name: 'Ragusa' },
+  vatID: '01223810886',
+  priceRange: '€€',
+  hasCredential: 'ISO 9001:2015 dal 2019',
+};
+---
+<BaseLayout
+  title="Studio Legale Micieli — Ragusa"
+  description="Studio Legale Micieli a Ragusa: consulenza in diritto tributario, societario, recupero crediti, compliance 231 e diritto civile. Patrocinante in Cassazione. Certificato ISO 9001:2015."
+  canonical="https://studiolegalemicieli.it/"
+  active="home"
+>
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(schema)} />
+  <HomePage />
+</BaseLayout>

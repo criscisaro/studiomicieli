@@ -1,0 +1,12 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import LegalPage from '../../components/pages/LegalPage.astro';
+import { PRIVACY_POLICY } from '../../legal';
+---
+<BaseLayout
+  title="Privacy Policy | Studio Legale Micieli"
+  description="Informativa privacy dello Studio Legale Micieli ai sensi del GDPR (Reg. UE 2016/679): finalità, base giuridica, conservazione e diritti dell'interessato."
+  canonical="https://studiolegalemicieli.it/privacy/"
+>
+  <LegalPage policy={PRIVACY_POLICY} kind="privacy" />
+</BaseLayout>
