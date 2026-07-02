@@ -20,7 +20,11 @@ import { TEAM } from '../../data';
         {TEAM.map((p) => (
           <div class="team-card">
             <div class="team-photo-wrap">
-              <img class="team-photo" src={p.photo} alt={p.name} loading="lazy" />
+              {p.photo ? (
+                <img class="team-photo" src={p.photo} alt={`Ritratto di ${p.name}`} loading="lazy" style={`object-position:${p.focus || '50% 20%'}`} />
+              ) : (
+                <div class="team-initials" aria-hidden="true">{p.name.replace(/^(Avv\.|Dott\.)\s*/, '').split(' ').map((w) => w[0]).slice(0, 2).join('')}</div>
+              )}
             </div>
             <div class="team-plate">
               <div class="label-track" style="font-size:11px;color:var(--gold-500)">{p.role}</div>

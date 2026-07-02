@@ -111,7 +111,16 @@
     try { localStorage.setItem(STORAGE_KEY, JSON.stringify({ necessary: true, analytics: !!c.analytics, ts: Date.now() })); }
     catch (e) {}
   }
-  function hideBanner() { if (banner) banner.classList.remove('show'); }
+  var root = document.documentElement;
+  function syncBannerOffset() {
+    if (banner && banner.classList.contains('show')) {
+      root.style.setProperty('--cookie-h', banner.offsetHeight + 'px');
+      root.classList.add('cookie-active');
+    } else {
+      root.classList.remove('cookie-active');
+    }
+  }
+  function hideBanner() { if (banner) banner.classList.remove('show'); syncBannerOffset(); }
   function openModal() {
     var current = loadConsent();
     var t = modal && modal.querySelector('[data-analytics-toggle]');
@@ -121,6 +130,8 @@
   function closeModal() { if (modal) modal.classList.remove('show'); }
 
   if (!loadConsent() && banner) banner.classList.add('show');
+  syncBannerOffset();
+  window.addEventListener('resize', syncBannerOffset);
 
   document.querySelectorAll('[data-cookie-settings]').forEach(function (b) {
     b.addEventListener('click', openModal);

@@ -13,6 +13,7 @@ export interface TeamMember {
   name: string;
   role: string;
   photo: string;
+  focus?: string; // object-position per inquadrare bene il volto
   short: string;
   bio: string;
   tags: string[];
@@ -85,7 +86,8 @@ export const TEAM: TeamMember[] = [
   {
     name: 'Avv. Giusy Micieli',
     role: 'Titolare',
-    photo: '/team/giusy-micieli.png',
+    photo: '/team/giusy-micieli.jpg',
+    focus: '50% 15%',
     short: 'Patrocinante in Cassazione · Presidente Camera Tributaria di Ragusa',
     bio: "Titolare dello Studio Legale Micieli. Laurea magistrale in Giurisprudenza presso l'Università di Catania nel 1985, Master in Direzione Aziendale e Master in Diritto Tributario. Iscritta all'albo degli Avvocati di Ragusa, patrocinante in Cassazione e Presidente della Camera Tributaria di Ragusa dal 2010.",
     tags: ['Tributario', 'Societario'],
@@ -93,7 +95,8 @@ export const TEAM: TeamMember[] = [
   {
     name: 'Avv. Angelo Firritto',
     role: 'Avvocato',
-    photo: '/team/angelo-firritto.png',
+    photo: '/team/angelo-firritto.jpg',
+    focus: '50% 14%',
     short: 'Bocconi 2020 · Master D.lgs. 231/2001 — Milano',
     bio: "Laurea magistrale in Giurisprudenza presso l'Università Commerciale Luigi Bocconi nel 2020, con Master \"Il D.lgs. n. 231/2001: responsabilità da reato degli enti e compliance aziendale\" presso l'Università degli Studi di Milano. Iscritto all'albo degli Avvocati di Ragusa dal 2022, in Studio dal 2020 con esperienza in diritto tributario, societario, civile e penale dell'economia.",
     tags: ['Compliance 231', 'Societario', 'Penale'],
@@ -101,7 +104,8 @@ export const TEAM: TeamMember[] = [
   {
     name: 'Avv. Giovanni Sarrì',
     role: 'Avvocato · Revisore Legale',
-    photo: '/team/giovanni-sarri.png',
+    photo: '/team/giovanni-sarri.jpg',
+    focus: '50% 10%',
     short: 'Master in Diritto ed Economia · Revisore della Sostenibilità',
     bio: "Laurea magistrale in Giurisprudenza presso l'Università degli Studi di Catania nel 2014 e Master in Diritto ed Economia per la nuova impresa nel 2018 presso Unitelma Sapienza. Iscritto all'albo degli Avvocati di Ragusa dal 2018, in Studio dal settembre 2014. Iscritto al Registro dei Revisori Legali dal 2024 e abilitato come Revisore della Sostenibilità.",
     tags: ['Tributario', 'Societario', 'Sostenibilità'],
@@ -110,6 +114,7 @@ export const TEAM: TeamMember[] = [
     name: 'Avv. Francesca Maltese',
     role: 'Avvocato · Dottoranda di Ricerca',
     photo: '/team/francesca-maltese.png',
+    focus: '50% 8%',
     short: '110 e lode · Dottoranda di Ricerca in Diritto Civile, Università di Catania',
     bio: "Laurea magistrale in Giurisprudenza presso l'Università degli Studi di Catania nel 2020 con votazione 110/110 cum laude. Dal dicembre 2024 Dottoranda di Ricerca in Diritto Civile presso il Dipartimento di Giurisprudenza dell'Università di Catania. Iscritta all'albo degli Avvocati di Ragusa dal 2024, fa parte dell'organico dello Studio con esperienza in diritto tributario, recupero crediti e Diritto Civile.",
     tags: ['Civile', 'Tributario', 'Recupero crediti'],
@@ -118,6 +123,7 @@ export const TEAM: TeamMember[] = [
     name: 'Avv. Sofia Tagliarini',
     role: 'Avvocato',
     photo: '/team/sofia-tagliarini.png',
+    focus: '46% 12%',
     short: 'Università di Tor Vergata · Master didattica giuridico-economica',
     bio: "Laurea magistrale in Giurisprudenza presso l'Università degli Studi di Tor Vergata nel 2018, Master per l'insegnamento delle materie giuridico-economiche negli istituti di secondo grado. Iscritta all'albo degli Avvocati di Ragusa dal 2022, in Studio dal 2021 con esperienza in diritto tributario, recupero crediti e diritto di famiglia.",
     tags: ['Tributario', 'Famiglia', 'Recupero crediti'],
@@ -126,6 +132,7 @@ export const TEAM: TeamMember[] = [
     name: 'Avv. Paolo Frasca',
     role: 'Avvocato',
     photo: '/team/paolo-frasca.png',
+    focus: '50% 6%',
     short: "Master in Diritto Penale dell'Impresa · Alma Mater Bologna",
     bio: "Laurea magistrale in Giurisprudenza presso l'Università degli Studi di Catania nel 2019, Master in diritto penale dell'impresa e dell'economia presso l'Alma Mater Studiorum — Università di Bologna. Iscritto all'albo degli Avvocati di Ragusa dal 2022, ha maturato esperienza in diritto penale e diritto penale dell'economia. In Studio dal 2025.",
     tags: ['Penale', "Penale d'impresa"],
@@ -134,6 +141,7 @@ export const TEAM: TeamMember[] = [
     name: 'Dott. Ivan Giuliano',
     role: 'Praticante',
     photo: '/team/ivan-giuliano.png',
+    focus: '50% 8%',
     short: 'Alma Mater Studiorum — Bologna, 2023',
     bio: "Laurea in giurisprudenza presso l'Alma Mater Studiorum — Università di Bologna nel 2023. Entra a far parte dell'organico dello Studio Legale Micieli nel 2025, maturando esperienza in diritto tributario, recupero crediti e diritto civile.",
     tags: ['Tributario', 'Civile', 'Recupero crediti'],
@@ -141,7 +149,8 @@ export const TEAM: TeamMember[] = [
   {
     name: 'Dott. Orazio Scarso',
     role: 'Praticante',
-    photo: '/team/orazio-scarso.png',
+    photo: '/team/orazio-scarso.jpg',
+    focus: '50% 12%',
     short: 'Università di Pisa, 2025',
     bio: "Laurea in giurisprudenza presso l'Università di Pisa nel 2025. Inizia la pratica forense entrando nell'organico dello Studio Legale Micieli nel mese di giugno dello stesso anno, maturando esperienza in diritto tributario, recupero crediti e diritto civile.",
     tags: ['Tributario', 'Civile', 'Recupero crediti'],
@@ -149,7 +158,7 @@ export const TEAM: TeamMember[] = [
   {
     name: 'Fabrizia Di Gregorio',
     role: 'Assistente Amministrativo Contabile',
-    photo: '/team/fabrizia-di-gregorio.png',
+    photo: '',
     short: 'In Studio dal 2004',
     bio: "Entra a far parte dell'organico dello Studio Legale Micieli nel 2004, maturando esperienza in ambito informatico, amministrativo e contabile.",
     tags: ['Amministrazione', 'Contabilità'],
@@ -157,7 +166,8 @@ export const TEAM: TeamMember[] = [
   {
     name: 'Cristina Iacono',
     role: 'Assistente Amministrativo',
-    photo: '/team/cristina-iacono.png',
+    photo: '/team/cristina-iacono.jpg',
+    focus: '50% 15%',
     short: 'In Studio dal 2025',
     bio: "Entra a far parte dell'organico dello Studio Legale Micieli dal 2025, maturando esperienza in ambito amministrativo e informatico.",
     tags: ['Amministrazione'],

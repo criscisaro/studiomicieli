@@ -47,18 +47,22 @@ const toggles = [
 
 <style is:global>
   #a11y-fab {
-    position: fixed; left: clamp(14px, 2vw, 24px); bottom: clamp(18px, 2.6vw, 28px); z-index: 60;
+    position: fixed; left: clamp(14px, 2vw, 24px); bottom: clamp(18px, 2.6vw, 28px); z-index: 95;
     width: 46px; height: 46px; background: var(--ink-900); color: var(--gold-500);
     border: 1px solid var(--line-strong); display: flex; align-items: center; justify-content: center;
-    cursor: pointer; box-shadow: 0 6px 18px rgba(0,0,0,0.32); transition: background 200ms, color 200ms;
+    cursor: pointer; box-shadow: 0 6px 18px rgba(0,0,0,0.32); transition: background 200ms, color 200ms, bottom 260ms ease;
   }
   #a11y-fab:hover { background: var(--gold-500); color: var(--ink-900); }
   #a11y-panel {
-    position: fixed; left: clamp(14px, 2vw, 24px); bottom: calc(clamp(18px, 2.6vw, 28px) + 58px); z-index: 61;
+    position: fixed; left: clamp(14px, 2vw, 24px); bottom: calc(clamp(18px, 2.6vw, 28px) + 58px); z-index: 96;
     width: min(340px, calc(100vw - 2rem)); background: var(--ink-800);
     border: 1px solid var(--line-strong); box-shadow: 0 24px 60px rgba(0,0,0,0.5); display: none;
   }
   #a11y-panel.open { display: block; }
+  /* Col cookie banner visibile: solleva il FAB sopra il banner così resta toccabile */
+  html.cookie-active:not(.a11y-open) #a11y-fab { bottom: calc(var(--cookie-h, 120px) + 16px); }
+  /* All'apertura del pannello nasconde il banner (un solo pannello per volta) */
+  html.a11y-open #cookieBanner { display: none !important; }
   .a11y-head { display: flex; align-items: center; justify-content: space-between; background: var(--ink-900); color: var(--cream); padding: 14px 16px; }
   .a11y-title { display: flex; align-items: center; gap: 8px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; font-size: 12px; color: var(--gold-500); }
   .a11y-head button { background: transparent; border: none; color: var(--cream); padding: 4px; display: flex; cursor: pointer; transition: color 200ms; }
@@ -114,8 +118,8 @@ const toggles = [
       });
       try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) {}
     }
-    function openPanel() { panel.classList.add('open'); fab.setAttribute('aria-expanded', 'true'); }
-    function closePanel() { panel.classList.remove('open'); fab.setAttribute('aria-expanded', 'false'); }
+    function openPanel() { panel.classList.add('open'); root.classList.add('a11y-open'); fab.setAttribute('aria-expanded', 'true'); }
+    function closePanel() { panel.classList.remove('open'); root.classList.remove('a11y-open'); fab.setAttribute('aria-expanded', 'false'); }
 
     fab.addEventListener('click', function () { panel.classList.contains('open') ? closePanel() : openPanel(); });
     document.getElementById('a11y-close').addEventListener('click', closePanel);
