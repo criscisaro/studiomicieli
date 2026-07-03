@@ -158,7 +158,8 @@ export const TEAM: TeamMember[] = [
   {
     name: 'Fabrizia Di Gregorio',
     role: 'Assistente Amministrativo Contabile',
-    photo: '',
+    photo: '/team/fabrizia-di-gregorio.png',
+    focus: '50% 0%',
     short: 'In Studio dal 2004',
     bio: "Entra a far parte dell'organico dello Studio Legale Micieli nel 2004, maturando esperienza in ambito informatico, amministrativo e contabile.",
     tags: ['Amministrazione', 'Contabilità'],
