@@ -1,0 +1,20 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "redirects": [
+    { "source": "/lo-studio", "destination": "/", "permanent": true },
+    { "source": "/lo-studio/", "destination": "/", "permanent": true },
+    { "source": "/archivio-news-ed-eventi", "destination": "/eventi/", "permanent": true },
+    { "source": "/archivio-news-ed-eventi/", "destination": "/eventi/", "permanent": true },
+    { "source": "/contattaci", "destination": "/", "permanent": true },
+    { "source": "/contattaci/", "destination": "/", "permanent": true },
+    { "source": "/application", "destination": "/", "permanent": true },
+    { "source": "/application/", "destination": "/", "permanent": true },
+    { "source": "/2021/02/22/modelli-operativi-e-di-gestione-ex-d-lgs-n-231-2001", "destination": "/servizi/", "permanent": true },
+    { "source": "/2021/02/22/modelli-operativi-e-di-gestione-ex-d-lgs-n-231-2001/", "destination": "/servizi/", "permanent": true },
+    { "source": "/:year(\\d{4})/:month(\\d{2})/:day(\\d{2})/:slug*", "destination": "/eventi/", "permanent": true },
+    { "source": "/category/:slug*", "destination": "/eventi/", "permanent": true },
+    { "source": "/tag/:slug*", "destination": "/eventi/", "permanent": true },
+    { "source": "/wp-admin/:path*", "destination": "/", "permanent": false },
+    { "source": "/wp-login.php", "destination": "/", "permanent": false }
+  ]
+}

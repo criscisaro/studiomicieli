@@ -21,13 +21,13 @@ const schema = EVENTS.map((ev) => ({
   eventStatus: 'https://schema.org/EventScheduled',
   description: ev.blurb,
   location: { '@type': 'Place', name: ev.location, address: 'Ragusa, Italia' },
-  organizer: { '@type': 'LegalService', name: 'Studio Legale Micieli', url: 'https://studiolegalemicieli.it' },
+  organizer: { '@type': 'LegalService', name: 'Studio Legale Micieli', url: 'https://www.studiolegalemicieli.it' },
 }));
 ---
 <BaseLayout
   title="Eventi e Formazione Giuridica | Studio Legale Micieli Ragusa"
   description="Eventi e formazione giuridica dello Studio Legale Micieli a Ragusa: compliance 231, sicurezza sul lavoro, sostenibilità e diritto tributario."
-  canonical="https://studiolegalemicieli.it/eventi/"
+  canonical="https://www.studiolegalemicieli.it/eventi/"
   active="eventi"
 >
   <script type="application/ld+json" slot="head" set:html={JSON.stringify(schema)} />

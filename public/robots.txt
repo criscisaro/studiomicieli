@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://studiolegalemicieli.it/sitemap.xml
+Sitemap: https://www.studiolegalemicieli.it/sitemap.xml
