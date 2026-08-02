@@ -1,0 +1,33 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Arrow from '../components/Arrow.astro';
+---
+<BaseLayout
+  title="Pagina non trovata | Studio Legale Micieli"
+  description="La pagina cercata non esiste o è stata spostata. Torna alla home dello Studio Legale Micieli di Ragusa."
+  canonical="https://www.studiolegalemicieli.it/404"
+>
+  <main>
+    <section class="section" style="background:var(--ink-800);padding-top:clamp(72px, 10vw, 140px);padding-bottom:clamp(72px, 10vw, 140px)">
+      <div class="container">
+        <div style="max-width:760px">
+          <div class="eyebrow" style="color:var(--gold-500);margin-bottom:18px">Errore 404</div>
+          <h1 class="display" style="font-size:clamp(28px, 4.4vw, 54px);margin:0;font-weight:300">La pagina che cerchi<br />non è disponibile.</h1>
+          <p style="margin-top:26px;font-size:clamp(15px, 1.3vw, 17px);line-height:1.7;opacity:0.86;max-width:640px;text-wrap:pretty">
+            L'indirizzo potrebbe essere errato oppure la pagina è stata spostata. Puoi tornare alla home o consultare direttamente le nostre aree di pratica.
+          </p>
+          <div style="display:flex;flex-wrap:wrap;gap:12px;margin-top:40px">
+            <a href="/" data-variant="filled" class="label-track" style="background:var(--gold-500);color:var(--ink-900);border:none;padding:16px 24px;font-size:11px;display:inline-flex;align-items:center;gap:12px">Torna alla home <Arrow /></a>
+            <a href="/servizi/" class="label-track" style="background:transparent;color:var(--cream);border:1px solid var(--line-strong);padding:16px 24px;font-size:11px;display:inline-flex;align-items:center">Le aree di pratica</a>
+          </div>
+          <div style="margin-top:48px;padding-top:28px;border-top:1px solid var(--line)">
+            <div class="eyebrow" style="color:var(--gold-500);margin-bottom:14px">Hai bisogno di assistenza?</div>
+            <p style="margin:0;opacity:0.85;line-height:1.7;font-size:15px">
+              Scrivi a <a href="mailto:studio@studiolegalemicieli.it" style="color:var(--gold-500)">studio@studiolegalemicieli.it</a> o chiama lo <a href="tel:+390932652308" style="color:var(--gold-500)">0932 652308</a>.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+</BaseLayout>

@@ -1,0 +1,96 @@
+# =====================================================================
+# Studio Legale Micieli — configurazione Apache (hosting Aruba)
+# Sito statico. Non richiede PHP né database.
+# =====================================================================
+
+# --- Priorità a index.html -------------------------------------------
+# IMPORTANTE: se nello spazio resta un index.php di WordPress, senza
+# questa riga Apache servirebbe quello invece del sito nuovo.
+DirectoryIndex index.html index.php
+
+# --- Pagina di errore personalizzata ---------------------------------
+ErrorDocument 404 /404.html
+
+# --- Niente elenco file nelle cartelle senza index -------------------
+# NOTA: se dopo il caricamento il sito mostra "500 Internal Server Error",
+# è quasi certamente questa riga: alcuni hosting non permettono "Options"
+# nel file .htaccess. In quel caso commentala mettendo un # davanti.
+Options -Indexes
+
+<IfModule mod_rewrite.c>
+RewriteEngine On
+
+  # --- Forza HTTPS -----------------------------------------------------
+  # Si attiva solo se il proxy Aruba dichiara esplicitamente "http",
+  # così non si può innescare un loop di redirect.
+  RewriteCond %{HTTP:X-Forwarded-Proto} =http
+  RewriteRule ^(.*)$ https://www.studiolegalemicieli.it/$1 [R=301,L]
+
+  # --- Forza www -------------------------------------------------------
+  # Il sito è indicizzato su www: manteniamo quello come indirizzo unico.
+  RewriteCond %{HTTP_HOST} !^www\. [NC]
+  RewriteRule ^(.*)$ https://www.studiolegalemicieli.it/$1 [R=301,L]
+
+  # --- Redirect dalle vecchie pagine WordPress -------------------------
+  # Servono a non perdere il posizionamento su Google.
+  RewriteRule ^lo-studio/?$                   /            [R=301,L]
+  RewriteRule ^archivio-news-ed-eventi/?$     /eventi/     [R=301,L]
+  RewriteRule ^contattaci/?$                  /            [R=301,L]
+  RewriteRule ^application/?$                 /            [R=301,L]
+
+  # Vecchio articolo sui modelli 231
+  RewriteRule ^2021/02/22/modelli-operativi-e-di-gestione-ex-d-lgs-n-231-2001/?$ /servizi/ [R=301,L]
+
+  # Qualunque altro vecchio permalink con data (es. /2021/05/10/titolo/)
+  RewriteRule ^[0-9]{4}/[0-9]{2}/[0-9]{2}/.*$ /eventi/     [R=301,L]
+  RewriteRule ^category/.*$                   /eventi/     [R=301,L]
+  RewriteRule ^tag/.*$                        /eventi/     [R=301,L]
+
+  # Vecchie rotte di WordPress non più esistenti
+  RewriteRule ^wp-admin(/.*)?$                /            [R=302,L]
+  RewriteRule ^wp-login\.php$                 /            [R=302,L]
+  RewriteRule ^xmlrpc\.php$                   /            [R=302,L]
+</IfModule>
+
+# --- Blocca l'accesso alla copia di backup del vecchio sito -----------
+# (se hai spostato WordPress nella cartella _vecchio-sito)
+RedirectMatch 404 ^/_vecchio-sito(/.*)?$
+
+# --- Compressione ------------------------------------------------------
+# Su Aruba non c'è la CDN: la compressione fa la differenza sui tempi.
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css
+  AddOutputFilterByType DEFLATE application/javascript application/x-javascript
+  AddOutputFilterByType DEFLATE application/json application/xml
+  AddOutputFilterByType DEFLATE image/svg+xml
+</IfModule>
+
+# --- Cache del browser -------------------------------------------------
+<IfModule mod_expires.c>
+  ExpiresActive On
+  # Immagini, font e icone: cambiano di rado
+  ExpiresByType image/png                 "access plus 6 months"
+  ExpiresByType image/jpeg                "access plus 6 months"
+  ExpiresByType image/webp                "access plus 6 months"
+  ExpiresByType image/svg+xml             "access plus 6 months"
+  ExpiresByType image/x-icon              "access plus 6 months"
+  # CSS e JS
+  ExpiresByType text/css                  "access plus 1 month"
+  ExpiresByType application/javascript    "access plus 1 month"
+  # HTML: breve, così gli aggiornamenti si vedono subito
+  ExpiresByType text/html                 "access plus 10 minutes"
+</IfModule>
+
+# --- Intestazioni di sicurezza ----------------------------------------
+<IfModule mod_headers.c>
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set X-Frame-Options "SAMEORIGIN"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+</IfModule>
+
+# --- Tipi MIME (alcuni hosting non li dichiarano) ----------------------
+<IfModule mod_mime.c>
+  AddType image/svg+xml   .svg
+  AddType image/webp      .webp
+  AddType application/xml .xml
+</IfModule>
