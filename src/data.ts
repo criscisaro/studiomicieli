@@ -99,7 +99,7 @@ export const TEAM: TeamMember[] = [
     focus: '50% 0%',
     short: 'Bocconi 2020 · Master D.lgs. 231/2001 — Milano',
     bio: "Laurea magistrale in Giurisprudenza presso l'Università Commerciale Luigi Bocconi nel 2020, con Master \"Il D.lgs. n. 231/2001: responsabilità da reato degli enti e compliance aziendale\" presso l'Università degli Studi di Milano. Iscritto all'albo degli Avvocati di Ragusa dal 2022, in Studio dal 2020 con esperienza in diritto tributario, societario, civile e penale dell'economia.",
-    tags: ['Compliance 231', 'Societario', 'Penale'],
+    tags: ['Compliance 231', 'Societario', 'Tributario', 'Civile'],
   },
   {
     name: 'Avv. Giovanni Sarrì',
