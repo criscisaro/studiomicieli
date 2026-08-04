@@ -47,21 +47,46 @@ TOTAL=$(find . -type f | wc -l | tr -d ' ')
 echo "==> Carico $TOTAL file su $FTP_HOST$FTP_DIR"
 $DRY_RUN && echo "    (prova a vuoto: non carico niente)"
 
+# La password viene passata a curl tramite un file temporaneo con permessi
+# ristretti, non come argomento: così non compare nell'elenco dei processi.
+CURLRC=""
+if ! $DRY_RUN; then
+  CURLRC="$(mktemp)"; chmod 600 "$CURLRC"
+  printf 'user = "%s:%s"\n' "$FTP_USER" "$FTP_PASS" > "$CURLRC"
+  trap 'rm -f "$CURLRC"' EXIT INT TERM
+fi
+
+# Dimensione del file sul server (0 se assente).
+remote_size() {
+  curl -sS --ftp-ssl-control -K "$CURLRC" --head \
+      "ftp://${FTP_HOST}${FTP_DIR}$1" 2>/dev/null \
+    | awk -F': *' '/[Cc]ontent-[Ll]ength/{gsub(/\r/,"",$2); print $2+0}'
+}
+
+# ATTENZIONE, non cambiare in --ssl-reqd: il canale DATI cifrato di Aruba
+# tronca i trasferimenti (file arrivati a 0 byte o tagliati a 32 KB, senza
+# che curl segnali errore). Con --ftp-ssl-control la cifratura resta sul
+# canale di controllo, quindi le credenziali viaggiano protette; il
+# contenuto dei file viaggia in chiaro, ma sono file di un sito pubblico.
+# Ogni caricamento viene verificato confrontando le dimensioni.
 upload() {
-  local f="$1" rel="${1#./}"
+  local f="$1" rel="${1#./}" want got try
   if $DRY_RUN; then
     printf "    · %s\n" "$rel"
     return
   fi
-  # --ssl: usa FTPS se il server lo supporta, altrimenti FTP normale
-  if curl -sS --ssl --ftp-create-dirs -T "$f" \
-        --user "$FTP_USER:$FTP_PASS" \
-        "ftp://${FTP_HOST}${FTP_DIR}${rel}"; then
-    printf "    ✓ %s\n" "$rel"
-  else
-    printf "    ✗ %s  (NON caricato)\n" "$rel" >&2
-    return 1
-  fi
+  want=$(wc -c < "$f" | tr -d ' ')
+  for try in 1 2 3; do
+    curl -sS --ftp-ssl-control --ftp-create-dirs -K "$CURLRC" -T "$f" \
+      "ftp://${FTP_HOST}${FTP_DIR}${rel}" >/dev/null 2>&1
+    got=$(remote_size "$rel")
+    if [ "$got" = "$want" ]; then
+      printf "    ✓ %-34s %s byte\n" "$rel" "$got"
+      return 0
+    fi
+  done
+  printf "    ✗ %-34s atteso %s, sul server %s\n" "$rel" "$want" "${got:-0}" >&2
+  return 1
 }
 
 FAILED=0
