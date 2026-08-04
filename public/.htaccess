@@ -68,12 +68,14 @@ RedirectMatch 404 ^/_vecchio-sito(/.*)?$
 # --- Cache del browser -------------------------------------------------
 <IfModule mod_expires.c>
   ExpiresActive On
-  # Immagini, font e icone: cambiano di rado
-  ExpiresByType image/png                 "access plus 6 months"
-  ExpiresByType image/jpeg                "access plus 6 months"
-  ExpiresByType image/webp                "access plus 6 months"
-  ExpiresByType image/svg+xml             "access plus 6 months"
-  ExpiresByType image/x-icon              "access plus 6 months"
+  # Immagini: 30 giorni. NON alzare a mesi: i nomi dei file non contengono
+  # un'impronta del contenuto, quindi sostituendo una foto (stesso nome) chi
+  # ha gia' visitato il sito continuerebbe a vedere la vecchia fino a scadenza.
+  ExpiresByType image/png                 "access plus 30 days"
+  ExpiresByType image/jpeg                "access plus 30 days"
+  ExpiresByType image/webp                "access plus 30 days"
+  ExpiresByType image/svg+xml             "access plus 30 days"
+  ExpiresByType image/x-icon              "access plus 30 days"
   # CSS e JS
   ExpiresByType text/css                  "access plus 1 month"
   ExpiresByType application/javascript    "access plus 1 month"
